@@ -1,9 +1,8 @@
 import pymupdf
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain.embeddings import OpenAIEmbeddings
+import re
 
 
-path = 'somme.pdf'
+path = 'somme_theologique_72a102.pdf'
 
 
 # Extract pdf
@@ -11,17 +10,11 @@ doc = pymupdf.open(path)
 text = "\n".join(page.get_text() for page in doc)
 doc.close()
 
-# Chunk text
-splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-chunks = splitter.split_text(text)
+# découpage du texte d'après motif de paragraphe
+paragraphes = re.split('QUESTION |Article ',text)
 
-# print nb chunks
-print(chunks[0])
-print('-'*10)
-print(chunks[1])
 
-# Transform chunks into vectors
-# embedding_model = OpenAIEmbeddings()
-# vectors = embedding_model.embed_documents(chunks)
+# affiche extrait n°2 :
+print(paragraphes[1])
 
 
