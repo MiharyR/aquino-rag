@@ -2,5 +2,5 @@
 .idea
 .env
 
-# files
-files/somme.pdf
+# data
+data/somme.pdf
