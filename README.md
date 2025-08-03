@@ -6,17 +6,11 @@ Ce projet permet:
 
 Ce projet utilise la base vectoriel [Qdrant](https://qdrant.tech/qdrant-vector-database/).
 
+### Table des matières
+- [I. Pré-requis](#i-pré-requis)  
+- [II. Initialiser le RAG](#ii-initialiser-le-rag)  
+- [III. Poser une question au RAG](#iii-poser-une-question-au-rag)  
 
----
-
-
-## Table des matières
-I. Pré-requis  
-II. Initialiser le RAG  
-III. Poser une question au RAG  
-
-
----
 
 
 ## I. Pré-requis
@@ -40,7 +34,6 @@ QDRANT_PORT=6333
 ```
 
 
----
 
 
 ## II. Initialiser le rag
@@ -80,7 +73,6 @@ python src/initialize_rag/cli.py \
       2. ajoute les vecteurs à la collection
 
 
----
 
 
 ## III. Poser une question au RAG
