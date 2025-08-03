@@ -1,9 +1,7 @@
-import os
-
 import click
-from dotenv import load_dotenv
 
 from src.initialize_rag.rag_initializer_name_to_class import RAG_INITIALIZER_NAME_TO_CLASS
+from src.utils.handle_env_vars import handle_env_vars
 
 
 @click.command(help='Initialize RAG')
@@ -36,10 +34,7 @@ def run(rag_initializer_name: str, file_path: str, collection_name: str, overwri
     """Initialize RAG with the given file path and collection name"""
 
     # Load environment variables from .env file
-    load_dotenv()
-    host = os.getenv('QDRANT_HOST', 'localhost')
-    port = os.getenv('QDRANT_PORT', 6333)
-    embedding_model_name = os.getenv('EMBEDDING_MODEL_NAME', 'camembert/flaubert')
+    env_vars = handle_env_vars()
 
     # Get the rag initializer class
     if rag_initializer_name in RAG_INITIALIZER_NAME_TO_CLASS:
@@ -53,11 +48,11 @@ def run(rag_initializer_name: str, file_path: str, collection_name: str, overwri
     # Instantiate the rag initializer
     rag_initializer = rag_initializer_class(
         file_path=file_path,
-        host=host,
-        port=port,
+        host=env_vars['host'],
+        port=env_vars['port'],
         collection_name=collection_name,
         overwrite_collection=overwrite_collection,
-        embedding_model_name=embedding_model_name,
+        embedding_model_name=env_vars['embedding_model_name'],
     )
 
     # Run the rag initializer
