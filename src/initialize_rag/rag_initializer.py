@@ -39,7 +39,7 @@ class RagInitializer(ABC):
         )
 
     def extract_text_from_file(self, file_path: str) -> str:
-        raise NotImplementedError("This method should be implemented in a subclass.")
+        raise NotImplementedError('This method should be implemented in a subclass')
 
     def clean_text(self, text: str) -> str:
         return text
@@ -90,5 +90,5 @@ class RagInitializer(ABC):
         # Upload vector and chunks to Qdrant
         client.upload_points(
             collection_name=collection_name,
-            points=[PointStruct(id=i, vector=vec, payload={"text": chunks[i]}) for i, vec in enumerate(vectors)],
+            points=[PointStruct(id=i, vector=vec, payload={'text': chunks[i]}) for i, vec in enumerate(vectors)],
         )

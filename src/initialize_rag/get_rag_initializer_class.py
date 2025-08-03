@@ -8,4 +8,4 @@ def get_rag_initializer_class(file_path: str):
     elif file_path.endswith('.txt'):
         return RagInitializerFromTxt
     else:
-        raise ValueError(f"Unsupported file type for RAG initialization: {file_path}")
+        raise ValueError(f'Unsupported file type for RAG initialization: {file_path}')
