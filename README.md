@@ -88,7 +88,7 @@ python src/initialize_rag/cli.py \
 
 - Commande : 
 ```bash
-python src/ask_question/cli.py \
+python src/ask_rag/cli.py \
     --rag-answerer-name <rag_answerer_name> \
     --question "<question>" \
     --collection-name <collection_name> \
@@ -98,7 +98,7 @@ python src/ask_question/cli.py \
 
 - Exemple :
 ```bash
-python src/cli/ask_question/cli.py \
+python src/cli/ask_rag/cli.py \
     --rag-answerer-name 'base' \
     --question "Qu'est que la grâce ?" \
     --collection-name somme_theologique \
@@ -107,7 +107,7 @@ python src/cli/ask_question/cli.py \
 ```
 
 - Paramètres :
-  - `rag_answerer_name`: nom du `RagAnswerer` à utiliser (cf [rag_answerer_name_to_class.py](src/ask_question/rag_answerer_name_to_class.py)) 
+  - `rag_answerer_name`: nom du `RagAnswerer` à utiliser (cf [rag_answerer_name_to_class.py](src/ask_rag/rag_answerer_name_to_class.py)) 
   - `question` : la question à poser au RAG
   - `collection_name` : nom de la collection dans Qdrant où les vecteurs sont stockés
   - `limit` : nombre maximum de résultats à retourner (optionnel, par défaut c'est 3)
@@ -123,6 +123,6 @@ python src/cli/ask_question/cli.py \
 
 
 - Implémenter son propre `RagAnswerer` :
-  - Créer un fichier dans `src/ask_question/rag_answerers/`
+  - Créer un fichier dans `src/ask_rag/rag_answerers/`
   - Implémenter, dans ce fichier, la nouvelle classe (hérite de `RagAnswerer`)  
-  - Ajouter le nom de la classe dans le fichier: [rag_answerer_name_to_class.py](src/ask_question/rag_answerer_name_to_class.py)
+  - Ajouter le nom de la classe dans le fichier: [rag_answerer_name_to_class.py](src/ask_rag/rag_answerer_name_to_class.py)

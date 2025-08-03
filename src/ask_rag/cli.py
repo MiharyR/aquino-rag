@@ -1,6 +1,6 @@
 import click
 
-from src.ask_question.rag_answerer_name_to_class import RAG_ANSWERER_NAME_TO_CLASS
+from src.ask_rag.rag_answerer_name_to_class import RAG_ANSWERER_NAME_TO_CLASS
 from src.utils.handle_env_vars import handle_env_vars
 
 
