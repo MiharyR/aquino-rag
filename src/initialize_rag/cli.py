@@ -39,6 +39,7 @@ def run(rag_initializer_name: str, file_path: str, collection_name: str, overwri
     load_dotenv()
     host = os.getenv('QDRANT_HOST', 'localhost')
     port = os.getenv('QDRANT_PORT', 6333)
+    embedding_model_name = os.getenv('EMBEDDING_MODEL_NAME', 'camembert/flaubert')
 
     # Get the rag initializer class
     if rag_initializer_name in RAG_INITIALIZER_NAME_TO_CLASS:
@@ -56,6 +57,7 @@ def run(rag_initializer_name: str, file_path: str, collection_name: str, overwri
         port=port,
         collection_name=collection_name,
         overwrite_collection=overwrite_collection,
+        embedding_model_name=embedding_model_name,
     )
 
     # Run the rag initializer

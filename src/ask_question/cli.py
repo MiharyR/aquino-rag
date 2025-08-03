@@ -47,6 +47,7 @@ def run(rag_answerer_name: str, question: str, collection_name: str, limit: int,
     load_dotenv()
     host = os.getenv('QDRANT_HOST', 'localhost')
     port = os.getenv('QDRANT_PORT', 6333)
+    embedding_model_name = os.getenv('EMBEDDING_MODEL_NAME', 'camembert/flaubert')
 
     # Get the rag initializer class
     if rag_answerer_name in RAG_ANSWERER_NAME_TO_CLASS:
@@ -65,6 +66,7 @@ def run(rag_answerer_name: str, question: str, collection_name: str, limit: int,
         collection_name=collection_name,
         limit=limit,
         score_threshold=score_threshold,
+        embedding_model_name=embedding_model_name,
     )
 
     # Run the rag answerer

@@ -31,6 +31,7 @@ which python
 ```ini
 QDRANT_HOST='localhost'
 QDRANT_PORT=6333
+EMBEDDING_MODEL_NAME='camembert/flaubert'
 ```
 
 

@@ -3,7 +3,6 @@ from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 from qdrant_client.models import VectorParams, Distance, PointStruct
 
-from src.utils.constants import MODEL_FOR_EMBEDDING
 from src.utils.timer_decorator import decorate_all_methods
 
 
@@ -20,8 +19,8 @@ class RagInitializer(ABC):
         self.port = kwargs.get('port', 6333)
         self.collection_name = kwargs.get('collection_name', 'collection')
         self.overwrite_collection = kwargs.get('overwrite_collection', False)
+        self.embedding_model_name = kwargs.get('embedding_model_name')
         self.client = QdrantClient(host=self.host, port=self.port)
-        self.model_name = MODEL_FOR_EMBEDDING
 
     def run(self):
         """Main method to run the RAG initialization process."""
@@ -52,7 +51,7 @@ class RagInitializer(ABC):
         return chunks
 
     def transform_chunks_into_vectors(self, chunks: list) -> list:
-        encoder = SentenceTransformer(self.model_name)
+        encoder = SentenceTransformer(self.embedding_model_name)
         return encoder.encode(chunks).tolist()
 
     def upload_data(

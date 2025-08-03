@@ -1,7 +1,6 @@
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 
-from src.utils.constants import MODEL_FOR_EMBEDDING
 from src.utils.timer_decorator import decorate_all_methods
 
 
@@ -15,9 +14,8 @@ class RagAnswerer:
         self.collection_name = kwargs.get('collection_name', 'collection')
         self.limit = kwargs.get('limit', 3)
         self.score_threshold = kwargs.get('score_threshold', 0.5)
+        self.embedding_model_name = kwargs.get('embedding_model_name')
         self.client = QdrantClient(host=self.host, port=self.port)
-        self.model_name = MODEL_FOR_EMBEDDING
-
 
     def run(self):
         vectorized_question = self.vectorize_question()
@@ -25,7 +23,7 @@ class RagAnswerer:
         self.handle_results(results)
 
     def vectorize_question(self):
-        encoder = SentenceTransformer(self.model_name)
+        encoder = SentenceTransformer(self.embedding_model_name)
         return encoder.encode(self.question).tolist()
 
     def query_quadrant(self, vectorized_question: list):
