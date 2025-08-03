@@ -1,3 +1,6 @@
-somme.pdf
 .venv
 .idea
+.env
+
+# files
+files/somme.pdf
