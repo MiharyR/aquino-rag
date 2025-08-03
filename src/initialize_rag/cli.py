@@ -6,10 +6,7 @@ from dotenv import load_dotenv
 from src.initialize_rag.get_rag_initializer_class import get_rag_initializer_class
 
 
-@click.command(
-    name='initialize-rag',
-    help='Initialize RAG',
-)
+@click.command(help='Initialize RAG')
 @click.option(
     '--file-path',
     '-f',
@@ -29,11 +26,7 @@ from src.initialize_rag.get_rag_initializer_class import get_rag_initializer_cla
     required=False,
     help='Overwrite the collection if it already exists',
 )
-def main(
-    file_path: str,
-    collection_name: str,
-    overwrite_collection: bool,
-):
+def run(file_path: str, collection_name: str, overwrite_collection: bool):
     """Initialize RAG with the given file path and collection name"""
 
     # Load environment variables from .env file
@@ -58,4 +51,4 @@ def main(
 
 
 if __name__ == '__main__':
-    main()
+    run()

@@ -6,10 +6,7 @@ from dotenv import load_dotenv
 from src.ask_question.rag_answerer import RagAnswerer
 
 
-@click.command(
-    name='ask-question',
-    help='Ask question to RAG',
-)
+@click.command(help='Ask question to RAG')
 @click.option(
     '--question',
     '-q',
@@ -34,7 +31,7 @@ from src.ask_question.rag_answerer import RagAnswerer
     default=0.5,
     help='Score threshold for filtering results',
 )
-def main(question: str, collection_name: str, limit: int, score_threshold: float):
+def run(question: str, collection_name: str, limit: int, score_threshold: float):
     """Ask a question to the RAG system and retrieve answers from the specified collection"""
 
     # Load environment variables from .env file
@@ -57,4 +54,4 @@ def main(question: str, collection_name: str, limit: int, score_threshold: float
 
 
 if __name__ == '__main__':
-    main()
+    run()
