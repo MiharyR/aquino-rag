@@ -1,33 +1,78 @@
 # Aquino-rag
 
-Ce projet permet:
-1. d'initialiser un RAG
-2. de poser des questions à ce RAG
+This project allows you to:
+1. initialize a RAG
+2. ask questions to this RAG
 
-Ce projet utilise la base vectoriel [Qdrant](https://qdrant.tech/qdrant-vector-database/).
-
-### Table des matières
-- [I. Pré-requis](#i-pré-requis)  
-- [II. Initialiser le RAG](#ii-initialiser-le-rag)  
-- [III. Poser une question au RAG](#iii-poser-une-question-au-rag)  
+This project uses the vector database [Qdrant](https://qdrant.tech/qdrant-vector-database/).
 
 
 
-## I. Pré-requis
-1. Installer docker
 
-2. Installer python 3.11
 
-3. Créer un environnement virtuel python3.11 :
+## Table of Contents
+- [I. Project structure](#i-project-structure)  
+- [II. Prerequisites](#ii-prerequisites)  
+- [III. Initialize rag](#iii-initialize-rag)
+- [VI. Ask rag](#iv-ask-rag)
+
+
+
+
+
+## I. Project structure
+```
+aquino-rag/
+│
+├── data/                                        # contains data which can be used
+│   ├── somme.pdf
+│   ├── somme_theologique_72a102.pdf
+│   ⋮
+│
+├── src/                                         # contains all the source code
+│   │
+│   ├── ask_rag/                                 # contains all the code to ask questions to the RAG
+│   │   ├── rag_answerer/                        # contains implementations of RAG answerers
+│   │   ├── cli.py                               # cli (Command Line Interface)
+│   │   ├── rag_answerer_name_to_class.py        # lists all the RAG answerers available
+│   │   └── readme.md
+│   │
+│   ├── initialize_rag/                          # contains all the code to initialize the RAG
+│   │   ├── rag_initializer/                     # contains implementations of RAG initializers
+│   │   ├── cli.py                               # cli (Command Line Interface)
+│   │   ├── rag_initializer_name_to_class.py     # list all the RAG initializers available
+│   │   └── readme.md
+│   │
+│   │
+│   └── utils/                                   # contains utility functions
+│
+├── .env
+├── .gitignore
+├── docker-compose.yml
+├── README.md
+└── requirements.txt
+```
+
+
+
+
+
+## II. Prerequisites
+
+1. Instal docker
+
+2. Install python3.11
+
+3. Create a python3.11 virtual environment :
 ```bash
 python3.11 -m venv .venv/aquino_rag
 source .venv/aquino_rag/bin/activate
 which python
 ```
 
-4. Installer les dépendances : `pip install -r requirements.txt`
+4. Install dependencies : : `pip install -r requirements.txt`
 
-5. Créer un fichier `.env` à la racine. Le rag l'utilisera pour se connecter à Qdrant.  
+5. Create a `.env` file at the root. The rag will use it to connect to Qdrant.
 ```ini
 QDRANT_HOST='localhost'
 QDRANT_PORT=6333
@@ -37,92 +82,13 @@ EMBEDDING_MODEL_NAME='camembert/flaubert'
 
 
 
-## II. Initialiser le rag
 
-1/ Lancer Qdrant : `docker-compose up -d`
-
-2/ Lancer le script d'initialisation du RAG :
-
-- Commande : 
-```bash
-python src/initialize_rag/cli.py \
-    --rag-inializer-name <rag_initializer_name> \
-    --file-path <file_path> \
-    --collection-name <collection_name>` \
-    [--overwrite-collection]
-```
-
-- Exemple : 
-```bash
-python src/initialize_rag/cli.py \
-    --rag-inializer-name 'from_pdf' \
-    --file-path files/somme_theologique_72a102.pdf \
-    --collection-name somme_theologique
-```
-
-- Paramètres :
-  - `rag_inializer_name`: nom du `RagInializer` à utiliser (cf [rag_initializer_name_to_class.py](src/initialize_rag/rag_initializer_name_to_class.py))
-  - `file_path` : chemin vers le fichier à indexer
-  - `collection_name` : nom de la collection dans Qdrant où les vecteurs seront stockés
-  - `overwrite_collection` : si la collection existe déjà, elle sera écrasée (optionnel, par défaut c'est `False`)
-
-
-- Fonctionnement du script :
-  1. Extrait le texte du fichier
-  2. Nettoie le texte (si besoin)
-  3. Découpe le texte en chunks
-  4. Transforme les chunks en vecteurs
-  5. Enregistre les vecteurs à Qdrant
-      1. crée la collection si elle n'existe pas
-      2. ajoute les vecteurs à la collection
-
-
-- Implémenter son propre `RagInitializer` :
-  - Créer un fichier dans `src/initialize_rag/rag_initializers/`
-  - Implémenter, dans ce fichier, la nouvelle classe (hérite de `RagInitializer`)  
-  - Ajouter le nom de la classe dans le fichier: [rag_initializer_name_to_class.py](src/initialize_rag/rag_initializer_name_to_class.py)
+## III. Initialize rag
+[documentation](src/initialize_rag/readme.md) : `src/initialize_rag/readme.md`
 
 
 
-## III. Poser une question au RAG
-
-- Commande : 
-```bash
-python src/ask_rag/cli.py \
-    --rag-answerer-name <rag_answerer_name> \
-    --question "<question>" \
-    --collection-name <collection_name> \
-    [--limit <limit>]
-    [--score-threshold <score_threshold>]
-```
-
-- Exemple :
-```bash
-python src/cli/ask_rag/cli.py \
-    --rag-answerer-name 'base' \
-    --question "Qu'est que la grâce ?" \
-    --collection-name somme_theologique \
-    --limit 5 \
-    --score-threshold 0.7
-```
-
-- Paramètres :
-  - `rag_answerer_name`: nom du `RagAnswerer` à utiliser (cf [rag_answerer_name_to_class.py](src/ask_rag/rag_answerer_name_to_class.py)) 
-  - `question` : la question à poser au RAG
-  - `collection_name` : nom de la collection dans Qdrant où les vecteurs sont stockés
-  - `limit` : nombre maximum de résultats à retourner (optionnel, par défaut c'est 3)
-  - `score_threshold` : seuil de similarité pour filtrer les résultats (optionnel, par défaut c'est 0.5)
 
 
-- Fonctionnement du script :
-  1. Transforme la question en vecteurs
-  2. Recherche les vecteurs les plus proches dans Qdrant
-  3. Retourne les resultats correspondants
-      - les chunks correspondants
-      - le score de similarité
-
-
-- Implémenter son propre `RagAnswerer` :
-  - Créer un fichier dans `src/ask_rag/rag_answerers/`
-  - Implémenter, dans ce fichier, la nouvelle classe (hérite de `RagAnswerer`)  
-  - Ajouter le nom de la classe dans le fichier: [rag_answerer_name_to_class.py](src/ask_rag/rag_answerer_name_to_class.py)
+## IV. Ask rag
+[documentation](src/ask_rag/readme.md) : `src/ask_rag/readme.md`
