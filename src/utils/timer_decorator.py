@@ -20,7 +20,6 @@ def timer(func):
     return wrapper
 
 
-# Décorateur de classe
 def decorate_all_methods(decorator: callable = timer):
     """Decorator to apply a decorator to all methods of a class"""
 
