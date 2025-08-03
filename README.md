@@ -45,6 +45,7 @@ QDRANT_PORT=6333
 - Commande : 
 ```bash
 python src/initialize_rag/cli.py \
+    --rag-inializer-name <rag_initializer_name> \
     --file-path <file_path> \
     --collection-name <collection_name>` \
     [--overwrite-collection]
@@ -53,11 +54,13 @@ python src/initialize_rag/cli.py \
 - Exemple : 
 ```bash
 python src/initialize_rag/cli.py \
+    --rag-inializer-name 'from_pdf' \
     --file-path files/somme_theologique_72a102.pdf \
     --collection-name somme_theologique
 ```
 
 - Paramètres :
+  - `rag_inializer_name`: nom du `RagInializer` à utiliser (cf [rag_initializer_name_to_class.py](src/initialize_rag/rag_initializer_name_to_class.py))
   - `file_path` : chemin vers le fichier à indexer
   - `collection_name` : nom de la collection dans Qdrant où les vecteurs seront stockés
   - `overwrite_collection` : si la collection existe déjà, elle sera écrasée (optionnel, par défaut c'est `False`)
@@ -73,13 +76,19 @@ python src/initialize_rag/cli.py \
       2. ajoute les vecteurs à la collection
 
 
+- Implémenter son propre `RagInitializer` :
+  - Créer un fichier dans `src/initialize_rag/rag_initializers/`
+  - Implémenter, dans ce fichier, la nouvelle classe (hérite de `RagInitializer`)  
+  - Ajouter le nom de la classe dans le fichier: [rag_initializer_name_to_class.py](src/initialize_rag/rag_initializer_name_to_class.py)
+
 
 
 ## III. Poser une question au RAG
 
 - Commande : 
 ```bash
-python src/ask_question/cli.py \ 
+python src/ask_question/cli.py \
+    --rag-answerer-name <rag_answerer_name> \
     --question "<question>" \
     --collection-name <collection_name> \
     [--limit <limit>]
@@ -89,6 +98,7 @@ python src/ask_question/cli.py \
 - Exemple :
 ```bash
 python src/cli/ask_question/cli.py \
+    --rag-answerer-name 'base' \
     --question "Qu'est que la grâce ?" \
     --collection-name somme_theologique \
     --limit 5 \
@@ -96,6 +106,7 @@ python src/cli/ask_question/cli.py \
 ```
 
 - Paramètres :
+  - `rag_answerer_name`: nom du `RagAnswerer` à utiliser (cf [rag_answerer_name_to_class.py](src/ask_question/rag_answerer_name_to_class.py)) 
   - `question` : la question à poser au RAG
   - `collection_name` : nom de la collection dans Qdrant où les vecteurs sont stockés
   - `limit` : nombre maximum de résultats à retourner (optionnel, par défaut c'est 3)
@@ -108,3 +119,9 @@ python src/cli/ask_question/cli.py \
   3. Retourne les resultats correspondants
       - les chunks correspondants
       - le score de similarité
+
+
+- Implémenter son propre `RagAnswerer` :
+  - Créer un fichier dans `src/ask_question/rag_answerers/`
+  - Implémenter, dans ce fichier, la nouvelle classe (hérite de `RagAnswerer`)  
+  - Ajouter le nom de la classe dans le fichier: [rag_answerer_name_to_class.py](src/ask_question/rag_answerer_name_to_class.py)
