@@ -60,9 +60,9 @@ def run(rag_answerer_name: str, question: str, collection_name: str, limit: int,
     # Instanciate the RagAnswerer
     rag_answerer = rag_answerer_class(
         question=question,
-        collection_name=collection_name,
         host=host,
         port=port,
+        collection_name=collection_name,
         limit=limit,
         score_threshold=score_threshold,
     )
