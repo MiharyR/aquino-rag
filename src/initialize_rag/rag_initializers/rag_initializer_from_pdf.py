@@ -11,8 +11,8 @@ class RagInitializerFromPdf(RagInitializer):
     Class for initializing a RAG from a PDF file.
     """
 
-    def extract_text_from_file(self, file_path: str) -> str:
-        with pymupdf.open(file_path) as doc:
+    def extract_text_from_file(self) -> str:
+        with pymupdf.open(self.file_path) as doc:
             text = '\n'.join(page.get_text() for page in doc)
         return text
 
