@@ -1,4 +1,4 @@
-from src.initialize_rag.rag_initializer import RagInitializer
+from src.initialize_rag.rag_initializers.rag_initializer import RagInitializer
 import pymupdf
 import re
 
