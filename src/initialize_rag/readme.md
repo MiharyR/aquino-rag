@@ -33,7 +33,7 @@ python src/initialize_rag/cli.py \
 
 
 ## II. How it works
-The code is implemented in the run method of `RagInitializer` class (and its subclasses).
+![intialize_rag](doc/initialize_rag.png)
 
 Steps :
 1. Extract text from the file

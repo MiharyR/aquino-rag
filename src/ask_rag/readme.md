@@ -33,16 +33,17 @@ python src/cli/ask_rag/cli.py \
 
 
 ## II. How it works
-The code is implemented in the run method of `RagAnswerer` class (and its subclasses).
+![ask_rag](doc/ask_rag.png)
 
 Steps :
 1. Transform the question into vectors
-2. Search for the closest vectors in Qdrant
-3. Return the corresponding results
+2. Query Qdrant. Quadrant returns : 
     - the corresponding chunks
     - the similarity score
+3. Handle the results
+    - for example, in base the result chunks and the score is printed on the console
 
-
+Note : In future version, we will enrich the results with LLMs (Large Language Models) to generate more complete answers.
 
 
 
