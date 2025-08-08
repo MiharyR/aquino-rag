@@ -52,11 +52,3 @@ Steps :
 2. Implement in this file the new class (inherits from `RagInitializer`)
 3. Add the class in the file [rag_initializer_name_to_class.py](rag_initializer_name_to_class.py)
 4. Launch the python command with `rag_initializer_name` set to the "name" of your class
-
-```
-python -m src.initialize_rag.cli \
-    --rag-initializer-name "from_pdf" \
-    --file-path "data/somme_theologique_72a102.pdf" \
-    --collection-name "collection>" \
-    --overwrite-collection
-```
