@@ -10,11 +10,11 @@ def timer(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        logging.info(f'start - {func.__name__}')
+        logging.info(f'[start] - {func.__name__}')
         start_time = time.time()
         result = func(*args, **kwargs)
         duration = time.time() - start_time
-        logging.info(f'end   - {func.__name__} : {duration:.2f}s')
+        logging.info(f'[ end ] - {func.__name__} : {duration:.2f}s')
         return result
 
     return wrapper

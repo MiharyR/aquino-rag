@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 from src.utils.timer_decorator import decorate_all_methods
 
 
-@decorate_all_methods
+@decorate_all_methods()
 class RagAnswerer:
 
     def __init__(self, *args, **kwargs):

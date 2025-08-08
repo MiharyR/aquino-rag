@@ -6,7 +6,7 @@ from qdrant_client.models import VectorParams, Distance, PointStruct
 from src.utils.timer_decorator import decorate_all_methods
 
 
-@decorate_all_methods
+@decorate_all_methods()
 class RagInitializer(ABC):
     """
     Abstract class for initializing a Retrieval-Augmented Generation (RAG) system.

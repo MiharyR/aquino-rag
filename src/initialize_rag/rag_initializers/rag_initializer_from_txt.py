@@ -2,7 +2,7 @@ from src.initialize_rag.rag_initializers.rag_initializer import RagInitializer
 from src.utils.timer_decorator import decorate_all_methods
 
 
-@decorate_all_methods
+@decorate_all_methods()
 class RagInitializerFromTxt(RagInitializer):
     """
     Class for initializing a RAG from a txt file.

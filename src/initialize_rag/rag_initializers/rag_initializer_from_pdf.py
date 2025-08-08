@@ -5,7 +5,7 @@ import re
 from src.utils.timer_decorator import decorate_all_methods
 
 
-@decorate_all_methods
+@decorate_all_methods()
 class RagInitializerFromPdf(RagInitializer):
     """
     Class for initializing a RAG from a PDF file.
