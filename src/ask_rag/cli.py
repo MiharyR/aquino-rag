@@ -44,7 +44,7 @@ def run(rag_answerer_name: str, question: str, collection_name: str, limit: int,
     # Load environment variables from .env file
     env_vars = handle_env_vars()
 
-    # Get the rag initializer class
+    # Get the rag answerer class
     if rag_answerer_name in RAG_ANSWERER_NAME_TO_CLASS:
         rag_answerer_class = RAG_ANSWERER_NAME_TO_CLASS[rag_answerer_name]
     else:
