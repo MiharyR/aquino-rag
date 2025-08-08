@@ -4,7 +4,7 @@
 ## I. Command
 - Generic command :
 ```bash
-python src/ask_rag/cli.py \
+python -m src.ask_rag.cli \
     --rag-answerer-name <rag_answerer_name> \
     --question "<question>" \
     --collection-name <collection_name> \
@@ -14,7 +14,7 @@ python src/ask_rag/cli.py \
 
 - Example :
 ```bash
-python src/cli/ask_rag/cli.py \
+python -m src.ask_rag.cli \
     --rag-answerer-name 'base' \
     --question "Qu'est que la grâce ?" \
     --collection-name somme_theologique \

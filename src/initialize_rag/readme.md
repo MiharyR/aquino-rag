@@ -8,8 +8,8 @@
 
 - Generic command : 
 ```bash
-python src/initialize_rag/cli.py \
-    --rag-inializer-name <rag_initializer_name> \
+python -m src.initialize_rag.cli \
+    --rag-initializer-name <rag_initializer_name> \
     --file-path <file_path> \
     --collection-name <collection_name>` \
     [--overwrite-collection]
@@ -17,8 +17,8 @@ python src/initialize_rag/cli.py \
 
 - Example : 
 ```bash
-python src/initialize_rag/cli.py \
-    --rag-inializer-name 'from_pdf' \
+python -m src.initialize_rag.cli \
+    --rag-initializer-name 'from_pdf' \
     --file-path files/somme_theologique_72a102.pdf \
     --collection-name somme_theologique
 ```
@@ -52,3 +52,11 @@ Steps :
 2. Implement in this file the new class (inherits from `RagInitializer`)
 3. Add the class in the file [rag_initializer_name_to_class.py](rag_initializer_name_to_class.py)
 4. Launch the python command with `rag_initializer_name` set to the "name" of your class
+
+```
+python -m src.initialize_rag.cli \
+    --rag-initializer-name "from_pdf" \
+    --file-path "data/somme_theologique_72a102.pdf" \
+    --collection-name "collection>" \
+    --overwrite-collection
+```
